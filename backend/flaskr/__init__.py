@@ -229,11 +229,14 @@ def create_app(test_config=None):
     else:
 
       if category['type'] == 'click':
-        questions = Question.query.filter(Question.id.notin_((previous_question))).all()
+        questions = Question.query.filter(Question.id.notin_(previous_question)).all()
       else:
-        questions = Question.query.filter(Question.category == category['id']).filter(Question.id.notin_((previous_question))).all()
-
-      next_question = questions[random.randrange(0, len(questions))].format() if len(questions) > 0 else None
+        questions = Question.query.filter(Question.category == category['id']).filter(Question.id.notin_(previous_question)).all()
+      
+      if not questions:
+        next_question = None
+      else:
+        next_question = questions[random.randrange(0, len(questions))].format()
       
       return jsonify({
         'success' : True,
