@@ -60,10 +60,10 @@ GET '/categories'
 - Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category
 - Request Arguments: None
 - Returns: An object with a single key, categories, that contains a object of id: category_string key:value pairs. 
-'''
+```bash
 curl http://localhost:5000/categories
-'''
-'''
+```
+```bash
 {
   "categories": {
     "1": "Science", 
@@ -76,17 +76,17 @@ curl http://localhost:5000/categories
   "success": true, 
   "total_categories": 6
 }
-'''
+```
 
 
 GET '/questions'
 - Fetches a list of questions, including pagination (every 10 question)
 - Request Arguments: None
 - Returns: A list of paginated questions, number of total questions, current category, categories.
-'''
+```bash
 curl http://localhost:5000/questions
-'''
-'''
+```
+```bash
 {
   "categories": {
     "1": "Science", 
@@ -172,17 +172,17 @@ curl http://localhost:5000/questions
   "success": true, 
   "total_questions": 20
 }
-'''
+```
 
 
 DELETE '/questions/<int:question_id>'
 - Deletes a question that has id = question_id
 - Request Arguments: None
 - Returns: Question id of deleted question and remaining questions on the database
-'''
+```bash
 curl -X DELETE http://localhost:5000/questions/14
-'''
-'''
+```
+```bash
 {
   "categories": [
     {
@@ -287,17 +287,17 @@ curl -X DELETE http://localhost:5000/questions/14
   "success": true, 
   "total_questions": 19
 }
-'''
+```
 
 
 POST '/questions'
 - Adds a new question on the database
 - Request Arguments: {"question" : question, "answer" : answer, "difficulty" : difficulty, "category" : category id}
 - Returns: Question id of added question and new set of questions on the database
-'''
+```bash
 curl -X POST -H "Content-Type: application/json" -d '{"question": "Where is Microsoft headquarters in USA?", "answer" : "Redmond, Washington", "difficulty" : 1, "category" : "3"}' http://localhost:5000/questions
-'''
-'''
+```
+```bash
 {
   "created": 25, 
   "questions": [
@@ -375,17 +375,17 @@ curl -X POST -H "Content-Type: application/json" -d '{"question": "Where is Micr
   "success": true, 
   "total_questions": 20
 }
-'''
+```
 
 
 POST '/questions/search'
 - Fetches questions based on a search term
 - Request Arguments: {"searchTerm" : "searchTerm"}
 - Returns: Any questions for whom the search term is a substring of the question.
-'''
+```bash
 curl -X POST -H "Content-Type: application/json" -d '{"searchTerm" : "who" }' http://localhost:5000/questions/search
-'''
-'''
+```
+```bash
 {
   "current_caterogy": null, 
   "questions": [
@@ -421,17 +421,17 @@ curl -X POST -H "Content-Type: application/json" -d '{"searchTerm" : "who" }' ht
   "success": true, 
   "total_questions": 4
 }
-'''
+```
 
 
 GET '/categories/<int:category_id>/questions'
 - Fetches questions based on a category
 - Request Arguments: None
 - Returns: All questions with category = category_id
-'''
+```bash
 curl http://localhost:5000/categories/2/questions
-'''
-'''
+```
+```bash
 {
   "current_category": 2, 
   "questions": [
@@ -467,16 +467,16 @@ curl http://localhost:5000/categories/2/questions
   "success": true, 
   "total_questions": 4
 }
-'''
+```
 
 POST '/quizzes'
 - Allows users to play the quiz game
 - Request Arguments: {"previous_questions" : [list of question ids], "quiz_category" : {category : category_id}}
 - Returns: One question on "quiz_category" and not on "previous_questions"
-'''
+```bash
 curl -X POST -H "Content-Type: application/json" -d '{"previous_questions" : [18, 19], "quiz_category" : {"type": "Art", "id" : 2 }}' http://localhost:5000/quizzes
-'''
-'''
+```
+```bash
 {
   "question": {
     "answer": "Mona Lisa", 
@@ -487,7 +487,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"previous_questions" : [18
   }, 
   "success": true
 }
-'''
+```
 
 ### Error Handling
 The API will return three types of errors:
@@ -496,13 +496,13 @@ The API will return three types of errors:
 - 422 : Unprocessable
 
 An example of one error returned as JSON is following:
-'''
+```bash
 {
     "success" : False,
     "error" : 422,
     "message" : "unprocessable"
 }
-'''
+```
 
 
 ## Testing
