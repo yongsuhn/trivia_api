@@ -122,7 +122,7 @@ class TriviaTestCase(unittest.TestCase):
 
     def test_search_question(self):
         search = {'searchTerm' : 'who'}
-        res = self.client().post('/questions', json=search)
+        res = self.client().post('/questions/search', json=search)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -133,7 +133,7 @@ class TriviaTestCase(unittest.TestCase):
     def test_424_search_question(self):
         search = {'search' : ''}
 
-        res = self.client().post('/questions', json=search)
+        res = self.client().post('/questions/search', json=search)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 422)
